@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do Calendar</title>
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 30px;
+      height: 24px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1001;
+    }
+
+    .menu-toggle .bar {
+      height: 4px;
+      width: 100%;
+      background-color: #333;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 260px;
+      background: #b6ebed;
+      border-right: 1px solid #e0e0e0;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translateX(0);
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .sidebar.hidden {
+      transform: translateX(-100%);
+    }
+
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar input[type="text"] {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 30px;
+    }
+
+    .sidebar-section span {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar li {
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      color: #333;
+    }
+
+    .sidebar li:hover,
+    .sidebar li.active {
+      background: #f0f0f0;
+    }
+
+    .sidebar li a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0f7fa;
+      color: #006064;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin: 2px 4px 2px 0;
+    }
+
+    .content {
+      margin-left: 260px;
+      padding: 30px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .sidebar.hidden ~ .content {
+      margin-left: 0;
+    }
+
+    #calendar {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hamburger Toggle -->
+  <div class="menu-toggle" onclick="toggleSidebar()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <center><h2>Menu</h2></center>
+    <input type="text" placeholder="Search" />
+
+    <div class="sidebar-section">
+      <span><a href="home.html">BACK TO HOME</span></a>
+      <span>Tasks</span>
+      <ul>
+        <li><a href="upcomming.html">Upcoming</a></li>
+        <li><a href="calender.html">Calendar</a></li>
+        <li><a href="sticky.html">Sticky Wall</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <span>Lists</span>
+      <ul>
+        <li><a href ="personal.html">Personal</li></a>
+        <li>Work</li>
+        <li>List 1</li>
+        <li><i class="fa fa-plus"></i> Add New List</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <span>Tags</span>
+      <div>
+        <span class="tag">Tag 1</span>
+        <span class="tag" style="background:#f8d7da; color:#721c24;">Tag 2</span>
+        <span class="tag" style="background:#e2e3e5; color:#383d41;">+ Add Tag</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <ul>
+        <li><i class="fa fa-cog"></i> Settings</li>
+        <li><i class="fa fa-sign-out-alt"></i> Sign out</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Calendar</h1>
+    <div id='calendar'></div>
+  </div>
+
+  <!-- FullCalendar Script -->
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        editable: true,
+        selectable: true,
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        dateClick: function (info) {
+          const task = prompt("Enter a task for " + info.dateStr);
+          if (task) {
+            calendar.addEvent({
+              title: task,
+              start: info.dateStr,
+              allDay: true
+            });
+          }
+        }
+      });
+      calendar.render();
+    });
+
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('hidden');
+    }
+  </script>
+
+</body>
+</html>

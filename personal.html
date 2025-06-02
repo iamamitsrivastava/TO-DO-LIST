@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sticky Wall</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: cover;
+      padding: cover;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGj2ezvLUc5Jc6I5OQJ1kXmJY5WVzpeCmNYw&s') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #bbf8ec;
+      border-right: 1px solid #e0e0e0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar.hidden {
+      transform: translateX(-100%);
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-section span {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar li {
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .sidebar li:hover, .sidebar li.active {
+      background: #f0f0f0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e0f7fa;
+      color: #006064;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin: 2px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      margin-left: 260px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .main.full {
+      margin-left: 0;
+    }
+
+    .main h1 {
+      margin-bottom: 20px;
+      font-size: 26px;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .note {
+      background: #c0a037;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-height: 120px;
+    }
+
+    .note[contenteditable="true"]:focus {
+      outline: 2px solid #007BFF;
+    }
+
+    .note.blue {
+      background: #d1ecf1;
+    }
+
+    .note.red {
+      background: #f8d7da;
+    }
+
+    .note.orange {
+      background: #ffe5b4;
+    }
+
+    .note h3, .note p {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .note h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .note h3[contenteditable], .note p[contenteditable] {
+      cursor: text;
+    }
+
+    .add-note {
+      background: #8fce78;
+      color: #999;
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .add-note:hover {
+      background: #e71111;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-toggle" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <br><center>
+    <h2>Menu</h2></center>
+    <input type="text" placeholder="Search" />
+
+    <div class="sidebar-section">
+      <span><a href="home.html" >BACK TO HOME </span></a>
+      
+      <span>Tasks</span>
+      <ul>
+        <li><a href="sticky.html">Sticky Wall</a></li>
+        <li><a href="calender.html">Calendar</a></li>
+        <li><a href="upcomming.html">Upcoming</a></li>
+      </ul>
+    </div>
+    
+
+    <div class="sidebar-section">
+      <span>Lists</span>
+      <ul>
+        <li>Personal</li>
+        <li>Work</li>
+        <li>List 1</li>
+        <li><i class="fa fa-plus"></i> Add New List</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <span>Tags</span>
+      <div>
+        <span class="tag">Tag 1</span>
+        <span class="tag" style="background:#f8d7da; color:#721c24;">Tag 2</span>
+        <span class="tag" style="background:#e2e3e5; color:#383d41;">+ Add Tag</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <ul>
+        <li><i class="fa fa-cog"></i> Settings</li>
+        <li><i class="fa fa-sign-out-alt"></i> Sign out</li>
+      </ul>
+    </div>
+  </div>
+  <!-- ----------------- -->
+
+  <div class="main" id="main">
+    <center><h1>Personal Wall</h1></center>
+    <div class="notes-grid">
+      <div class="note yellow">
+        <h3 contenteditable="true">Social Media</h3>
+        <p contenteditable="true">- Plan content<br>- Build calendar<br>- Promotion strategy</p>
+      </div>
+      <div class="note blue">
+        <h3 contenteditable="true">Content Strategy</h3>
+        <p contenteditable="true">Research, team setup, and tool brainstorming.</p>
+      </div>
+      <div class="note red">
+        <h3 contenteditable="true">Email A/B Tests</h3>
+        <p contenteditable="true">- Subject lines<br>- Sender<br>- CTA<br>- Timing</p>
+      </div>
+      <div class="note orange">
+        <h3 contenteditable="true">Banner Ads</h3>
+        <p contenteditable="true">Size, imagery, and matching landing page.</p>
+      </div>
+      <div class="note add-note" onclick="addNewNote()">+</div>
+    </div>
+  </div>
+
+  <script>
+    function addNewNote() {
+      const grid = document.querySelector('.notes-grid');
+      const newNote = document.createElement('div');
+      newNote.className = 'note yellow';
+      newNote.innerHTML = `
+        <h3 contenteditable="true">New Note</h3>
+        <p contenteditable="true">- Write something...</p>
+      `;
+      grid.insertBefore(newNote, grid.lastElementChild);
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const main = document.getElementById('main');
+      sidebar.classList.toggle('hidden');
+      main.classList.toggle('full');
+    }
+  </script>
+</body>
+</html>

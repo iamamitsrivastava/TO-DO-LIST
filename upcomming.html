@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .upcoming-section {
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin: 40px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.upcoming-inner {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.upcoming-inner h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.upcoming-inner p {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.upcoming-inner ul {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  max-width: 500px;
+  margin: auto;
+  padding: 0;
+  list-style: none;
+}
+
+.upcoming-inner ul li::before {
+  content: "✨ ";
+  color: #ff9800;
+}
+
+.upcoming-inner button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upcoming-inner button:hover {
+  background-color: #0056b3;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Upcoming Features Section -->
+<div class="upcoming-section" id="upcoming">
+    <div class="upcoming-inner">
+      <h2>🚀 Upcoming Features</h2>
+      <p>We’re constantly improving your experience. Here’s what’s coming soon:</p>
+      <ul>
+        <li>✅ Sync with Google Calendar</li>
+        <li>🗣️ Voice-to-Note Functionality</li>
+        <li>🎨 Customizable Note Themes</li>
+        <li>🔔 Smart Reminders with AI Suggestions</li>
+        <li>📊 Productivity Analytics Dashboard</li>
+      </ul>
+      <a href="home.html"><button onclick="alert('Stay tuned! 🚧')">Notify Me</button></a>
+    </div>
+  </div>  
+</body>
+</html>

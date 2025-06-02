@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My To-Do List | Landing Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #5c8ed8, #74b9ff);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 52px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .cta-button {
+      background: white;
+      color: #5c8ed8;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background: #f0f0f0;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 60px auto;
+      max-width: 1200px;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .feature-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      flex: 1;
+      min-width: 280px;
+      max-width: 320px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-box i {
+      font-size: 38px;
+      color: #5c8ed8;
+      margin-bottom: 15px;
+    }
+
+    .feature-box h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .about {
+      background: #ffffff;
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #555;
+      margin: 30px auto;
+      max-width: 700px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #e9ecef;
+      color: #555;
+    }
+
+    footer nav a {
+      margin: 0 10px;
+      color: #5c8ed8;
+      text-decoration: none;
+    }
+
+    footer nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My To-Do List</h1>
+    <p>Plan smart. Stay focused. Get things done effortlessly.</p>
+    <a href="sticky.html" class="cta-button">Start Organizing Now</a>
+  </header>
+
+  <section class="features">
+    <div class="feature-box">
+      <i class="fa-solid fa-calendar-check"></i>
+      <h3>Upcoming Tasks</h3>
+      <p>Stay ahead with a smart preview of your scheduled tasks.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fa-solid fa-calendar-days"></i>
+      <h3>Calendar View</h3>
+      <p>Visualize and manage tasks using an interactive calendar.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fa-solid fa-note-sticky"></i>
+      <h3>Sticky Wall</h3>
+      <p>Pin important reminders on your personal sticky wall.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fa-solid fa-bolt"></i>
+      <h3>Quick Add</h3>
+      <p>Add tasks instantly from anywhere in the app with one click.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fa-solid fa-tags"></i>
+      <h3>Custom Tags</h3>
+      <p>Group and filter your tasks with customizable color tags.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fa-solid fa-gear"></i>
+      <h3>Fully Customizable</h3>
+      <p>Adjust themes, sections, and views based on your style.</p>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>Why Choose My To-Do List?</h2>
+    <p>Whether you're a student, professional, or a productivity enthusiast — this app is designed to help you organize tasks, set goals, and track your progress in a clean and effective interface.</p>
+    <p class="quote">"The secret of getting ahead is getting started." – Mark Twain</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 My To-Do List | All rights reserved.</p>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="calender.html">Calendar</a>
+      <a href="sticky.html">Sticky Wall</a>
+      <a href="upcomming.html">Upcoming</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
